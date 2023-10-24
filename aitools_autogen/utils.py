@@ -21,11 +21,11 @@ from typing import Tuple
 
 from autogen import Agent, ConversableAgent
 
-import aitools_autogen
+from config import UNKNOWN, WORKING_DIR, CODE_BLOCK_PATTERN
 
 
 def extract_code(
-        text: str, pattern: str = aitools_autogen.CODE_BLOCK_PATTERN,
+        text: str, pattern: str = CODE_BLOCK_PATTERN,
 ) -> List[Tuple[str, str]]:
     """
     Extract code blocks from a text and format preambles as comments.
@@ -88,7 +88,7 @@ def extract_code(
         result.append((lang, full_code))
 
     if not result:
-        result.append((aitools_autogen.UNKNOWN, text))
+        result.append((UNKNOWN, text))
 
     return result
 
@@ -226,7 +226,7 @@ def save_code(
         filename = f"tmp_code_{code_hash}.{'py' if lang.startswith('python') else lang}"
     elif isinstance(filename, list):
         filename = filename[0]
-    work_dir = work_dir or aitools_autogen.WORKING_DIR
+    work_dir = work_dir or WORKING_DIR
     filepath = os.path.join(work_dir, filename)
     file_dir = os.path.dirname(filepath)
     os.makedirs(file_dir, exist_ok=True)
@@ -257,7 +257,7 @@ def clear_working_dir(work_dir: Optional[str] = None, filename_wildcard: str = '
     Returns:
         None
     """
-    work_dir = work_dir or aitools_autogen.WORKING_DIR  # If work_dir is None, use WORKING_DIR
+    work_dir = work_dir or WORKING_DIR  # If work_dir is None, use WORKING_DIR
 
     if os.path.exists(work_dir) and os.path.isdir(work_dir):
         # Find all .py files in the working directory and subdirectories

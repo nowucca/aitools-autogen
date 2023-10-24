@@ -2,16 +2,15 @@ from typing import Optional
 
 from autogen import ConversableAgent
 
-import aitools_autogen
 import utils
 from agents import WebPageScraperAgent
 from blueprint import Blueprint
-from config import llm_config, config_list
+from config import llm_config, config_list, WORKING_DIR
 
 
 class CoreClientTestBlueprint(Blueprint):
 
-    def __init__(self, work_dir: Optional[str] = aitools_autogen.WORKING_DIR):
+    def __init__(self, work_dir: Optional[str] = WORKING_DIR):
         super().__init__([], config_list=config_list, llm_config=llm_config)
         self._work_dir = work_dir or "code"
         self._summary_result: Optional[str] = None
