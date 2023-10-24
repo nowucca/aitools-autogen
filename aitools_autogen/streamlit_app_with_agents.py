@@ -30,7 +30,7 @@ with blueprint_ctr:
     url = st.text_input("Enter a OpenAPI Schema URL to test:",
                         value="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/uspto.yaml")
     agents = st.button("Start the Agents!", type="primary")
-g st
+
 with parameter_ctr:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("### Other Options")
