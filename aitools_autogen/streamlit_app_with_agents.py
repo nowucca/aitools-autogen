@@ -5,7 +5,7 @@ import streamlit as st
 
 import utils
 from blueprint_generate_core_client import CoreClientTestBlueprint
-from config import llm_config
+from config import llm_config_openai as llm_config
 
 st.set_page_config(
     page_title="Streamlit Using Agents",

@@ -5,7 +5,7 @@ from autogen import ConversableAgent
 import utils
 from agents import WebPageScraperAgent
 from blueprint import Blueprint
-from config import llm_config, config_list, WORKING_DIR
+from config import llm_config_openai as llm_config, config_list_openai as config_list, WORKING_DIR
 
 
 class CoreClientTestBlueprint(Blueprint):

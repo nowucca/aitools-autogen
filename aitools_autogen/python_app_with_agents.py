@@ -1,42 +1,22 @@
 from autogen import ConversableAgent
 import utils
 from agents import WebPageScraperAgent
-
-config_list = [
-    {
-        'model': 'gpt-4',
-        'api_key': 'aitools',
-        'api_base': 'http://aitools.cs.vt.edu:7860/openai/v1'
-    }
-]
-
-llm_config = {
-    "request_timeout": 300,
-    "seed": 42,
-    "config_list": config_list,
-    "temperature": 0.1,
-    "allow_format_str_template": True
-}
-
-
-
-
-
+from config import llm_config_openai as llm_config, config_list_llama2 as config_list, WORKING_DIR
 
 agent0 = ConversableAgent("a0",
-                          max_consecutive_auto_reply=0,
-                          llm_config=False,
-                          human_input_mode="NEVER")
+    max_consecutive_auto_reply=0,
+    llm_config=False,
+    human_input_mode="NEVER")
 
 scraper_agent = WebPageScraperAgent()
 
 summary_agent = ConversableAgent("summary_agent",
-                                 max_consecutive_auto_reply=6,
-                                 llm_config=llm_config,
-                                 human_input_mode="NEVER",
-                                 code_execution_config=False,
-                                 function_map=None,
-                                 system_message="""You are a helpful AI assistant.
+    max_consecutive_auto_reply=6,
+    llm_config=llm_config,
+    human_input_mode="NEVER",
+    code_execution_config=False,
+    function_map=None,
+    system_message="""You are a helpful AI assistant.
 You can summarize OpenAPI specifications.  When given an OpenAPI specification, 
 output a summary in bullet point form for each endpoint.
 Let's make it concise in markdown format.
@@ -63,16 +43,16 @@ agent0.initiate_chat(summary_agent, True, True, message=message)
 
 api_description_message = agent0.last_message(summary_agent)
 
-#api_description = api_description_message["content"]
-#print(api_description)
+# api_description = api_description_message["content"]
+# print(api_description)
 
 aiohttp_client_agent = ConversableAgent("aiohttp_client_agent",
-                                 max_consecutive_auto_reply=6,
-                                 llm_config=llm_config,
-                                 human_input_mode="NEVER",
-                                 code_execution_config=False,
-                                 function_map=None,
-                                 system_message="""
+    max_consecutive_auto_reply=6,
+    llm_config=llm_config,
+    human_input_mode="NEVER",
+    code_execution_config=False,
+    function_map=None,
+    system_message="""
 You are a QA developer expert in Python, using the pytest framework.
 You're writing an http client layer for tests for an API.
 
@@ -101,6 +81,6 @@ agent0.initiate_chat(aiohttp_client_agent, True, True, message=api_description_m
 llm_message = agent0.last_message(aiohttp_client_agent)["content"]
 print(llm_message)
 
-utils.save_code_files(llm_message, "../.code")
+utils.save_code_files(llm_message, WORKING_DIR)
 
-print(utils.summarize_files("../.code"))
+print(utils.summarize_files(WORKING_DIR))

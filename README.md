@@ -52,10 +52,10 @@ Effectively these are the code generation utilities akin to the code execution
 utilities in `autogen` itself.
 
 The `aitools_autogen/python_app_with_agents.py` file is a standalone python program
-that runs a blueprint, generating example test code in the `.code/` folder.
+that runs a blueprint, generating example test code in the `coding/` folder.
 
 The `aitools_autogen/streamlit_app_with_agents.py` file is a streamlit app that
-runs a blueprint, generating example test code in the `.code/` folder.
+runs a blueprint, generating example test code in the `coding/` folder.
 The streamlit app offers facilities which can use different OpenAPI urls,
 clear the `.cache/` folder from `autogen`, and use different seed values.
 

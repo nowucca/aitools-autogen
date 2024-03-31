@@ -5,13 +5,7 @@ import autogen
 import requests
 from autogen import Agent, ConversableAgent
 
-# It was at one stage interesting to play with removing the default reply functions.
-# However, it just led to infinite conversations more easily.
-# I'm keeping this agent here as a reminder of how I implemented it.
-class CustomReplyAgent(ConversableAgent):
-    def __init__(self, name: str, **kwargs):
-        super().__init__(name=name if name is not None else "Custom Reply Agent", **kwargs)
-        self._reply_func_list = []
+from aitools_autogen.utils import print_conversable_agent_state
 
 
 # This is a general agent with a specific name and a specific reply function.
@@ -53,13 +47,13 @@ class OpenAPIAgent(autogen.AssistantAgent):
             return None
 
 
-# openai_agent = OpenAPIAgent()
-# task = """
-# I want to retrieve the Open API specification for the OpenAI API.
-# https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
-# """
-# openai_agent.receive(message=task, request_reply=True, sender=openai_agent)
-# agent_details.print_conversable_agent_state(openai_agent)
+openai_agent = OpenAPIAgent()
+task = """
+I want to retrieve the Open API specification for the OpenAI API.
+https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+"""
+openai_agent.receive(message=task, request_reply=True, sender=openai_agent)
+print_conversable_agent_state(openai_agent)
 
 
 # This is a general agent with a specific name and a specific reply function.

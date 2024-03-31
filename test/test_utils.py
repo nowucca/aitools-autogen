@@ -66,12 +66,12 @@ def test_extract_code():
     print(extract_code(test_response))
 
 def test_clear_working_dir():
-    clear_working_dir(".code")
+    clear_working_dir("coding")
 
 def test_save_code():
-    print(save_code_files(test_response, ".code"))
+    print(save_code_files(test_response, "coding"))
 
 def test_summarize_files():
-    result = summarize_files(".code")
+    result = summarize_files("coding")
     print(result)
 
