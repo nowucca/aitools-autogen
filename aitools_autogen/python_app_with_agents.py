@@ -35,11 +35,11 @@ I want to retrieve the Open API specification for the US Patent Office API.
 https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/uspto.yaml
 """
 
-agent0.initiate_chat(scraper_agent, True, True, message=task)
+agent0.initiate_chat(scraper_agent, True, message=task)
 
 message = agent0.last_message(scraper_agent)
 
-agent0.initiate_chat(summary_agent, True, True, message=message)
+agent0.initiate_chat(summary_agent, True, message=message)
 
 api_description_message = agent0.last_message(summary_agent)
 

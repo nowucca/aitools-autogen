@@ -6,7 +6,13 @@ config_list_openai = [
         'base_url': 'http://aitools.cs.vt.edu:7860/openai/v1',
         'api_key': 'aitools',
         'model': 'gpt-4-turbo-preview',
+    },
+    {
+        'base_url': 'http://aitools.cs.vt.edu:7860/openai/v1',
+        'api_key': 'aitools',
+        'model': 'gpt-3.5-turbo',
     }
+
 ]
 
 llm_config_openai = {
