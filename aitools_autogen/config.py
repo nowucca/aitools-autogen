@@ -23,23 +23,8 @@ llm_config_openai = {
     "allow_format_str_template": True
 }
 
-config_list_llama2 = [
-    {
-        'base_url': 'http://aitools.cs.vt.edu:4000',
-        'api_key': 'aitools',
-        'model': 'ollama/llama2',
-    }
-]
 
-llm_config_llama2 = {
-    "timeout": 300,
-    "seed": 42,
-    "config_list": config_list_llama2,
-    "temperature": 0.1,
-    "allow_format_str_template": True
-}
-
-DEFAULT_MODEL = "gpt-4"
+DEFAULT_MODEL = "gpt-4-turbo-preview"
 FAST_MODEL = "gpt-3.5-turbo"
 # Regular expression for finding a code block
 CODE_BLOCK_PATTERN = r"(.*?)```(\w*)\n(.*?)\n```"

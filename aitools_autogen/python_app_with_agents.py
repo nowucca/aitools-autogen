@@ -1,7 +1,10 @@
+from pickletools import stringnl_noescape
+
 from autogen import ConversableAgent
+
 import utils
 from agents import WebPageScraperAgent
-from config import llm_config_openai as llm_config, config_list_llama2 as config_list, WORKING_DIR
+from config import llm_config_openai as llm_config, WORKING_DIR
 
 agent0 = ConversableAgent("a0",
     max_consecutive_auto_reply=0,
@@ -31,15 +34,15 @@ Return `None` if the OpenAPI specification is not valid or cannot be summarized.
 # """
 
 task = """
-I want to retrieve the Open API specification for the US Patent Office API.
-https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/uspto.yaml
+I want to retrieve the Open API specification for the Petstore API.
+https://petstore3.swagger.io/api/v3/openapi.json
 """
 
 agent0.initiate_chat(scraper_agent, True, message=task)
 
-message = agent0.last_message(scraper_agent)
+message = scraper_agent.last_message()
 
-agent0.initiate_chat(summary_agent, True, message=message)
+agent0.initiate_chat(summary_agent, True, message=message["content"])
 
 api_description_message = agent0.last_message(summary_agent)
 

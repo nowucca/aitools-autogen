@@ -1,6 +1,7 @@
-pyautogen
+autogen-agentchat~=0.2
 requests
 streamlit
+streamlit-file-browser
 openai
 toml
 pandas

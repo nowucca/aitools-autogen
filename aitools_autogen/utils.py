@@ -21,7 +21,7 @@ from typing import Tuple
 
 from autogen import Agent, ConversableAgent
 
-from config import UNKNOWN, WORKING_DIR, CODE_BLOCK_PATTERN
+from aitools_autogen.config import UNKNOWN, WORKING_DIR, CODE_BLOCK_PATTERN
 
 
 def extract_code(

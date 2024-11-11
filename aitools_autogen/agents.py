@@ -5,11 +5,8 @@ import autogen
 import requests
 from autogen import Agent, ConversableAgent
 
-from aitools_autogen.utils import print_conversable_agent_state
-
-
 # This is a general agent with a specific name and a specific reply function.
-# It's not very useful, but it's a good example of how to implement a custom agent.
+# This is an example of how to implement a custom agent.
 class OpenAPIAgent(autogen.AssistantAgent):
     def __init__(self):
         super().__init__(name="OpenAPI Agent", llm_config=None,
@@ -47,18 +44,9 @@ class OpenAPIAgent(autogen.AssistantAgent):
             return None
 
 
-openai_agent = OpenAPIAgent()
-task = """
-I want to retrieve the Open API specification for the OpenAI API.
-https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
-"""
-openai_agent.receive(message=task, request_reply=True, sender=openai_agent)
-print_conversable_agent_state(openai_agent)
-
-
 # This is a general agent with a specific name and a specific reply function.
 # It scours a set of urls and gathers a dictionary of the content of each url.
-# There's no cycle protection yet.
+# There's no cycle protection yet if the urls self-refer to each other.
 class WebScraperAgent(autogen.AssistantAgent):
     def __init__(self):
         super().__init__(name="WebScraper Agent", llm_config=None,
@@ -124,3 +112,4 @@ class WebPageScraperAgent(WebScraperAgent):
         else:
             result = None
         return result
+

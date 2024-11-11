@@ -9,14 +9,16 @@
 # Usage
 
 To run the standalone python demonstration:
-    `(venv) $ python aitools_autogen/python_app_with_agents.py`
+    * `(venv) $ export PYTHONPATH="${PYTHONPATH}:${PWD}"`
+    * `(venv) $ python aitools_autogen/python_app_with_agents.py`
 
 To run the streamlit demonstration using blueprints:
-    `(venv) $ streamlit run aitools_autogen/streamlit_app_with_agents.py` 
+    * `(venv) $ export PYTHONPATH="${PYTHONPATH}:${PWD}"`
+    * `(venv) $ streamlit run aitools_autogen/streamlit_app_with_agents.py` 
 
 # Running Tests
 
-    `(venv) $ export PYTHONPATH="${PYTHONPATH}:${PWD}" && pytest
+    * `(venv) $ export PYTHONPATH="${PYTHONPATH}:${PWD}" && pytest
 
 
 # Overview

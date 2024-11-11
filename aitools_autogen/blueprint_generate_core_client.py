@@ -81,11 +81,11 @@ class CoreClientTestBlueprint(Blueprint):
 
         agent0.initiate_chat(scraper_agent, True, True, message=message)
 
-        message = agent0.last_message(scraper_agent)
+        message = agent0.last_message(scraper_agent)["content"]
 
         agent0.initiate_chat(summary_agent, True, True, message=message)
 
-        api_description_message = agent0.last_message(summary_agent)
+        api_description_message = agent0.last_message(summary_agent)["content"]
 
         # api_description = api_description_message["content"]
         # print(api_description)
@@ -96,3 +96,4 @@ class CoreClientTestBlueprint(Blueprint):
         utils.save_code_files(llm_message, self.work_dir)
 
         self._summary_result = utils.summarize_files(self.work_dir)
+

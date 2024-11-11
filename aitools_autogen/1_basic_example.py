@@ -1,5 +1,5 @@
 import autogen
-from aitools_autogen.config import llm_config_llama2, llm_config_openai
+from aitools_autogen.config import llm_config_openai
 
 # Define an assistant coder using the LLM
 coder = autogen.AssistantAgent(
@@ -24,7 +24,8 @@ user_proxy = autogen.UserProxyAgent(
         "work_dir": "tasks",
         "use_docker": False,
     },
-    llm_config=llm_config_llama2
+    llm_config=llm_config_openai,
+    system_message="""You are a user who can execute code.  You must provide feedback on the code quality.  Make sure each method is documented and tested."""
 )
 
 # Example Task
@@ -35,5 +36,8 @@ Write a function in Python to sort an array of integers using quicksort.
 res = user_proxy.initiate_chat(recipient=coder, message=task, max_turns=2, summary_method="last_msg")
 print(res)
 print("---")
-print(user_proxy.last_message(coder))
+print(user_proxy.chat_messages[coder][1]['content'])
 #%%
+
+
+

@@ -1,4 +1,5 @@
 import asyncio
+import os
 from asyncio import sleep
 
 import streamlit as st
@@ -6,6 +7,7 @@ import streamlit as st
 import utils
 from blueprint_generate_core_client import CoreClientTestBlueprint
 from config import llm_config_openai as llm_config
+from streamlit_file_browser import st_file_browser
 
 st.set_page_config(
     page_title="Streamlit Using Agents",
@@ -24,11 +26,15 @@ async def run_blueprint(seed: int = 42) -> str:
     await st.session_state.blueprint.initiate_work(message=task)
     return st.session_state.blueprint.summary_result
 
+if os.path.exists('aitools_autogen/coding'):
+    st.markdown('# Generated Code')
+    event = st_file_browser("aitools_autogen/coding", key='A')
+
 blueprint_ctr, parameter_ctr = st.columns(2, gap="large")
 with blueprint_ctr:
     st.markdown("# Run Blueprint")
     url = st.text_input("Enter a OpenAPI Schema URL to test:",
-                        value="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/uspto.yaml")
+                        value="https://petstore3.swagger.io/api/v3/openapi.json")
     agents = st.button("Start the Agents!", type="primary")
 
 with parameter_ctr:
@@ -39,10 +45,12 @@ with parameter_ctr:
 
 results_ctr = st.empty()
 
+
 if clear:
     with results_ctr:
         st.status("Clearing the agent cache...")
-    utils.clear_working_dir("../.cache", "*")
+        utils.clear_working_dir(".cache", "*")
+        st.status("Cache cleared!")
 
 if agents:
     with results_ctr:
@@ -55,6 +63,8 @@ if agents:
 
     text = asyncio.run(run_blueprint(seed=seed))
     st.balloons()
+
+
 
     with results_ctr:
         st.markdown(text)
