@@ -2,10 +2,10 @@ from typing import Optional
 
 from autogen import ConversableAgent
 
-import utils
-from agents import WebPageScraperAgent
-from blueprint import Blueprint
-from config import llm_config_openai as llm_config, config_list_openai as config_list, WORKING_DIR
+import aitools_autogen.utils
+from aitools_autogen.agents import WebPageScraperAgent
+from aitools_autogen.blueprint import Blueprint
+from aitools_autogen.config import llm_config_openai as llm_config, config_list_openai as config_list, WORKING_DIR
 
 
 class CoreClientTestBlueprint(Blueprint):
@@ -26,7 +26,7 @@ class CoreClientTestBlueprint(Blueprint):
         return self._work_dir
 
     async def initiate_work(self, message: str):
-        utils.clear_working_dir(self._work_dir)
+        aitools_autogen.utils.clear_working_dir(self._work_dir)
         agent0 = ConversableAgent("a0",
                                   max_consecutive_auto_reply=0,
                                   llm_config=False,
@@ -93,7 +93,7 @@ class CoreClientTestBlueprint(Blueprint):
         agent0.initiate_chat(aiohttp_client_agent, True, True, message=api_description_message)
 
         llm_message = agent0.last_message(aiohttp_client_agent)["content"]
-        utils.save_code_files(llm_message, self.work_dir)
+        aitools_autogen.utils.save_code_files(llm_message, self.work_dir)
 
-        self._summary_result = utils.summarize_files(self.work_dir)
+        self._summary_result = aitools_autogen.utils.summarize_files(self.work_dir)
 
